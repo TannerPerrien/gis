@@ -1,5 +1,8 @@
 package com.tannerperrien.gis.data.google;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 /**
@@ -7,18 +10,12 @@ import java.util.List;
  */
 public class ImageSearchResponse {
 
-    private List<ImageSearchResult> results;
-
-    private ImageSearchCursor cursor;
+    private ImageSearchResponseData responseData;
 
     private int responseStatus;
 
-    public List<ImageSearchResult> getResults() {
-        return results;
-    }
-
-    public ImageSearchCursor getCursor() {
-        return cursor;
+    public ImageSearchResponseData getResponseData() {
+        return responseData;
     }
 
     public int getResponseStatus() {

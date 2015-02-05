@@ -5,11 +5,11 @@ package com.tannerperrien.gis.data.google;
  */
 public class ImageSearchCursorPage {
 
-    private int start;
+    private String start;
 
     private int label;
 
-    public int getStart() {
+    public String getStart() {
         return start;
     }
 

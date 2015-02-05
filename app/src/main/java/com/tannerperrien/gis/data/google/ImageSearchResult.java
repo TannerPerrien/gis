@@ -5,23 +5,11 @@ package com.tannerperrien.gis.data.google;
  */
 public class ImageSearchResult {
 
-    private int width;
-
-    private int height;
-
     private String imageId;
 
     private String url;
 
     private String tbUrl;
-
-    public int getWidth() {
-        return width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
 
     public String getImageId() {
         return imageId;

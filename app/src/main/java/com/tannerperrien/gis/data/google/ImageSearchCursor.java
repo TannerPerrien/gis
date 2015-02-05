@@ -9,7 +9,7 @@ public class ImageSearchCursor {
 
     private List<ImageSearchCursorPage> pages;
 
-    private int estimatedResultCount;
+    private String estimatedResultCount;
 
     private int currentPageIndex;
 
@@ -17,7 +17,7 @@ public class ImageSearchCursor {
         return pages;
     }
 
-    public int getEstimatedResultCount() {
+    public String getEstimatedResultCount() {
         return estimatedResultCount;
     }
 

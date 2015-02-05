@@ -110,7 +110,7 @@ public class MainActivity extends BaseActivity {
 
         if (Intent.ACTION_SEARCH.equals(intent.getAction()) || true) {
 //            String query = intent.getStringExtra(SearchManager.QUERY);
-String query = "monkey";
+String query = "uber";
             imageSubscription.set(imageService.queryImages(query, 0).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ImageSearchResponse>() {
                     @Override
@@ -128,7 +128,7 @@ String query = "monkey";
                     @Override
                     public void onNext(ImageSearchResponse imageSearchResponse) {
                         images.clear();
-                        images.addAll(imageSearchResponse.getResults());
+                        images.addAll(imageSearchResponse.getResponseData().getResults());
                         imageAdapter.notifyDataSetChanged();
                     }
                 })
