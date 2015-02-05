@@ -8,7 +8,7 @@ import rx.Observable;
 
 public interface GoogleImageService {
 
-    @GET("/v1/products")
+    @GET("/images")
     Observable<ImageSearchResponse> queryImages(@Query("q") String query, @Query("start") int startIndex);
 
 }

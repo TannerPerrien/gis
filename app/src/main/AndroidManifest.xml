@@ -3,6 +3,8 @@
     package="com.tannerperrien.gis"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name=".GISApplication"
         android:allowBackup="true"

@@ -7,10 +7,21 @@ import java.util.List;
  */
 public class ImageSearchResponse {
 
-    private List<ImageSearchResults> imageSearchResults;
+    private List<ImageSearchResult> results;
 
-    private ImageSearchCursor imageSearchCursor;
+    private ImageSearchCursor cursor;
 
     private int responseStatus;
 
+    public List<ImageSearchResult> getResults() {
+        return results;
+    }
+
+    public ImageSearchCursor getCursor() {
+        return cursor;
+    }
+
+    public int getResponseStatus() {
+        return responseStatus;
+    }
 }

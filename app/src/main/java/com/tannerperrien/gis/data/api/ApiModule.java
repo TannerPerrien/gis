@@ -25,7 +25,7 @@ public class ApiModule {
     @Provides
     @Singleton
     Endpoint provideEndpoint() {
-        return Endpoints.newFixedEndpoint("https://ajax.googleapis.com/ajax/services/search/images");
+        return Endpoints.newFixedEndpoint("https://ajax.googleapis.com/ajax/services/search");
     }
 
     @Provides

@@ -3,7 +3,7 @@ package com.tannerperrien.gis.data.google;
 /**
  * Created by tperrien on 2/5/15.
  */
-public class ImageSearchResults {
+public class ImageSearchResult {
 
     private int width;
 

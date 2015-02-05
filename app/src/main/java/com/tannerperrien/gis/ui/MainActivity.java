@@ -7,11 +7,26 @@ import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.GridView;
 
+import com.squareup.picasso.Picasso;
 import com.tannerperrien.gis.R;
 import com.tannerperrien.gis.annotations.ForActivity;
+import com.tannerperrien.gis.data.api.GoogleImageService;
+import com.tannerperrien.gis.data.google.ImageSearchResponse;
+import com.tannerperrien.gis.data.google.ImageSearchResult;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.subscriptions.SerialSubscription;
+import timber.log.Timber;
 
 
 public class MainActivity extends BaseActivity {
@@ -19,11 +34,34 @@ public class MainActivity extends BaseActivity {
     @Inject
     @ForActivity
     Context context;
-    
+
+    @Inject
+    Picasso picasso;
+
+    @Inject
+    GoogleImageService imageService;
+
+    @InjectView(R.id.grid)
+    GridView gridView;
+
+    private ImageAdapter imageAdapter;
+
+    private List<ImageSearchResult> images;
+
+    private SerialSubscription imageSubscription = new SerialSubscription();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // View Injection
+        ButterKnife.inject(this);
+
+        // Init UI
+        images = new ArrayList<ImageSearchResult>();
+        imageAdapter = new ImageAdapter(context, images, picasso);
+        gridView.setAdapter(imageAdapter);
 
         handleIntent(getIntent());
     }
@@ -31,6 +69,13 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onNewIntent(Intent intent) {
         handleIntent(intent);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        imageSubscription.unsubscribe();
     }
 
     @Override
@@ -63,9 +108,31 @@ public class MainActivity extends BaseActivity {
 
     private void handleIntent(Intent intent) {
 
-        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            String query = intent.getStringExtra(SearchManager.QUERY);
-            //use the query to search your data somehow
+        if (Intent.ACTION_SEARCH.equals(intent.getAction()) || true) {
+//            String query = intent.getStringExtra(SearchManager.QUERY);
+String query = "monkey";
+            imageSubscription.set(imageService.queryImages(query, 0).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ImageSearchResponse>() {
+                    @Override
+                    public void onCompleted() {
+                        // TODO: Hide loading overlay
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        // TODO: Hide loading overlay
+
+                        Timber.e(e, "Could not load images");
+                    }
+
+                    @Override
+                    public void onNext(ImageSearchResponse imageSearchResponse) {
+                        images.clear();
+                        images.addAll(imageSearchResponse.getResults());
+                        imageAdapter.notifyDataSetChanged();
+                    }
+                })
+            );
         }
     }
 }
