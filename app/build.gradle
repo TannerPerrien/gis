@@ -21,5 +21,30 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    // Platform
     compile 'com.android.support:appcompat-v7:21.0.3'
+
+    // Architecture
+    compile 'com.netflix.rxjava:rxjava-core:0.20.6'
+    compile 'com.netflix.rxjava:rxjava-android:0.20.6'
+
+    // DI
+    compile 'com.squareup.dagger:dagger:1.2.2'
+    provided 'com.squareup.dagger:dagger-compiler:1.2.2'
+
+    // Networking
+    compile 'com.squareup.retrofit:retrofit:1.7.1'
+    compile 'com.squareup.okhttp:okhttp:2.0.0'
+    compile 'com.squareup.okhttp:okhttp-urlconnection:2.0.0'
+
+    // Data
+    compile 'com.google.code.gson:gson:2.3'
+
+    // UI Utils
+    compile 'com.squareup.picasso:picasso:2.4.0'
+    compile 'com.jakewharton:butterknife:5.1.2'
+
+    // Logging
+    compile 'com.jakewharton.timber:timber:2.4.1'
 }
